@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stratify</title>
+  </head>
+  <body>
+    <h1>Dashboard</h1>
+    <div id="dashHead">
+      <span id="currentUser">You're not logged in</span><br />
+      <button id="logoutBtn">Log out</button>
+    </div>
+
+    <h2>Playlists</h2>
+    <div id="followedPlaylists">
+      <label for="followed">Playlists I follow</label>
+      <select name="following" id="followed">
+        <option value="">--Select playlist to copy from--</option>
+      </select>
+      <br />
+      <button id="testBtn">Get playlist info</button>
+    </div>
+    <br />
+    <div id="ownedPlaylists">
+      <label for="owned">My Playlists</label>
+      <select name="owning" id="owned">
+        <option value="">--Copy to this playlist--</option>
+      </select>
+    </div>
+    <br />
+    <div>
+      <button id="copyBtn">Copy Songs</button>
+    </div>
+    <br />
+    <div id="msg"></div>
+  </body>
+  <script src="./dash.js"></script>
+</html>
