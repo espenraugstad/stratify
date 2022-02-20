@@ -241,21 +241,3 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("user");
   window.location.href = "index.html";
 });
-
-/*** FOR TESTING ONLY ***/
-document.getElementById("testBtn").addEventListener("click", async () => {
-  //Get playlist
-  const url = `https://api.spotify.com/v1/playlists/${followed.selectedOptions[0].value}`;
-
-  const cfg = {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-      Authorization: "Bearer " + access,
-    },
-  };
-
-  let res = await fetch(url, cfg);
-  let data = await res.json();
-  console.log(data);
-});
