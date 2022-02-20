@@ -1,5 +1,3 @@
-const ENV_VARS = require("./localenv");
-
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const express = require("express");
@@ -11,9 +9,11 @@ server.set("port", PORT);
 server.use(express.static("public"));
 server.use(express.json());
 
-const client_id = process.env.client_id || ENV_VARS.client_id;
-const client_secret = process.env.client_secret || ENV_VARS.client_secret;
-const redirect_uri = process.env.redirect_uri || ENV_VARS.redirect_uri;
+const client_id = process.env.client_id || require("./localenv").client_id;
+const client_secret =
+  process.env.client_secret || require("./localenv").client_secret;
+const redirect_uri =
+  process.env.redirect_uri || require("./localenv").redirect_uri;
 const AUTHORIZE = "https://accounts.spotify.com/authorize?";
 
 server.get("/login", (req, res) => {
