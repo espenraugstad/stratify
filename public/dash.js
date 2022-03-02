@@ -8,17 +8,28 @@ const owned = document.getElementById("owned");
 const copyBtn = document.getElementById("copyBtn");
 const msg = document.getElementById("msg");
 
-// Access token
-let access = localStorage.getItem("access");
 
-if (access && access !== "undefined") {
-  getCurrentUser();
-  getPlaylists(0);
-} else {
-  window.location.href = "index.html";
+// Access token
+let access = null;
+
+function checkAccess(){
+  access = localStorage.getItem("access");
+  if (access && access !== "undefined") {
+    return;
+  } else {
+    window.location.href = "index.html";
+  }
 }
 
+window.onload = function() {
+  checkAccess();
+  getCurrentUser();
+  getPlaylists(0);
+}
+
+
 copyBtn.addEventListener("click", async () => {
+  checkAccess();
   msg.innerHTML = "";
 
   if (
@@ -239,5 +250,8 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("access");
   localStorage.removeItem("refresh");
   localStorage.removeItem("user");
+
+  let backlen = history.length;
+  history.go(-backlen);
   window.location.href = "index.html";
 });

@@ -4,6 +4,10 @@ window.onload = function () {
   }
 };
 
+window.onpopstate = function(event) {
+  alert(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
+}
+
 // Login-button
 document.getElementById("loginBtn").addEventListener("click", () => {
   window.location.href = "/login";
