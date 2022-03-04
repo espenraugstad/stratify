@@ -7,12 +7,10 @@ const followed = document.getElementById("followed");
 const owned = document.getElementById("owned");
 const copyBtn = document.getElementById("copyBtn");
 const msg = document.getElementById("msg");
-
-
 // Access token
 let access = null;
 
-function checkAccess(){
+function checkAccess() {
   access = localStorage.getItem("access");
   if (access && access !== "undefined") {
     return;
@@ -21,12 +19,11 @@ function checkAccess(){
   }
 }
 
-window.onload = function() {
+window.onload = function () {
   checkAccess();
   getCurrentUser();
   getPlaylists(0);
-}
-
+};
 
 copyBtn.addEventListener("click", async () => {
   checkAccess();
@@ -251,7 +248,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("refresh");
   localStorage.removeItem("user");
 
-  let backlen = history.length;
-  history.go(-backlen);
+  window.location.replace("index.html");
   window.location.href = "index.html";
 });
