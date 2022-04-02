@@ -2,17 +2,33 @@
 const currentUser = document.getElementById("currentUser");
 const logout = document.getElementById("logout");
 const followedPlaylists = document.getElementById("followedPlaylists");
+const latest = document.getElementById("latest");
 const ownedPlaylists = document.getElementById("ownedPlaylists");
 const followed = document.getElementById("followed");
 const owned = document.getElementById("owned");
 const copyBtn = document.getElementById("copyBtn");
 const msg = document.getElementById("msg");
 
+// Global variables and constants
+const YEAR = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 // Access token
 let access = null;
 
-function checkAccess(){
+function checkAccess() {
   access = localStorage.getItem("access");
   if (access && access !== "undefined") {
     return;
@@ -21,12 +37,39 @@ function checkAccess(){
   }
 }
 
-window.onload = function() {
+window.onload = function () {
   checkAccess();
   getCurrentUser();
   getPlaylists(0);
-}
+};
 
+followed.addEventListener("change", async () => {
+  let followedTracks = await getTracks(followed.selectedOptions[0].value);
+
+  const lastTracks = 10;
+
+  let latestTracks = followedTracks.slice(-lastTracks);
+
+  let latestTracksOutput = "";
+
+  for (track of latestTracks) {
+    let added_by = await getUser(track.added_by.id);
+
+    let songName = track.track.name;
+    let artists = "";
+    for (artist of track.track.artists) {
+      artists += artist.name + ", ";
+    }
+    artists = artists.slice(0, -2);
+    let addedDate = new Date(track.added_at);
+    latestTracksOutput += `${songName} by ${artists}, added ${
+      YEAR[addedDate.getMonth()]
+    } ${addedDate.getDate()}, ${addedDate.getFullYear()}. Added by ${
+      added_by.display_name
+    }<br>`;
+  }
+  latest.innerHTML = "<h3>Last tracks added</h3>" + latestTracksOutput;
+});
 
 copyBtn.addEventListener("click", async () => {
   checkAccess();
@@ -78,6 +121,34 @@ async function getPlaylists(offset) {
 
     if (data.items.length >= 50) {
       getPlaylists(offset + 50);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getUser(user_id) {
+  const url = `https://api.spotify.com/v1/users/${user_id}`;
+
+  const cfg = {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Authorization: "Bearer " + access,
+    },
+  };
+
+  try {
+    let res = await fetch(url, cfg);
+    if (res.status === 401) {
+      refresh();
+    } else if (res.status === 200) {
+      let data = await res.json();
+      return data;
+    } else if (res.status === 404) {
+      return { display_name: "Unknown" };
+    } else {
+      throw "Unable to get current user";
     }
   } catch (err) {
     console.log(err);
@@ -251,7 +322,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("refresh");
   localStorage.removeItem("user");
 
-  let backlen = history.length;
-  history.go(-backlen);
+  window.location.replace("index.html");
   window.location.href = "index.html";
 });
