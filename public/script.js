@@ -31,7 +31,8 @@ async function getAccessToken() {
     } else {
       localStorage.setItem("access", data.access_token);
       localStorage.setItem("refresh", data.refresh_token);
-      window.location.href = "dashboard.html";
+      //Where to go after login
+      window.location.href = "all.html";
     }
   } catch (err) {
     console.log("Ooops");

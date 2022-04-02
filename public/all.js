@@ -173,7 +173,7 @@ async function getCurrentUser() {
     } else if (res.status === 200) {
       let data = await res.json();
       localStorage.setItem("user", data.id);
-      currentUser.innerHTML = `Welcome ${data.display_name}`;
+      currentUser.innerHTML = `${data.display_name}`;
     } else {
       throw "Unable to get current user";
     }

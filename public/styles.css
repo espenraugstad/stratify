@@ -2,6 +2,7 @@
 
 :root{
     --color-green: #1F9764;
+    --color-button: #808080;
     --color-background: #484848;
     --color-light: white;
 }
@@ -27,16 +28,13 @@ body{
 }
 
 button{
-    width: 230px;
-    height: 60px;
-    border-radius: 30px;
     border: none;
     background-color: var(--color-green);
     color: var(--color-light);
     font-size: 18px;
-    text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 button:hover{
