@@ -18,9 +18,25 @@
 header{
     height: 5rem;
     padding: 0 2rem;
-    
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+#logo{
+    font-size: 20pt;
+    font-weight: 900;
+}
+
+#right-side{
+    display: flex;
+    font-size: 14pt;
+}
+
+#right-side a {
+    text-decoration: none;
+    color: white;
+    margin-right: 2rem;
 }
 
 #user::after{
@@ -95,7 +111,7 @@ button:hover{
 /* ===== Login page ===== */ 
 #loginBtn{
     margin-top: 2rem;
-    width: 230px;
+    width: fit-content;
     height: 60px;
     border-radius: 30px;   
 }
