@@ -94,6 +94,27 @@ button:hover{
     margin-top: 2rem;
     width: 230px;
     height: 60px;
-    border-radius: 30px;
-    
+    border-radius: 30px;   
+}
+
+/* ==== Home ==== */
+#home-container{
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+#menu{
+    display: flex;
+}
+
+.menu-item{
+    margin: 0 2rem;
+    background-color: var(--color-button);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 250px;
+    font-size: 1.2rem;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
 }

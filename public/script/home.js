@@ -9,3 +9,8 @@ getCurrentUser().then((userName) => {
 
 
 document.getElementById("logoutBtn").addEventListener("click", logout);
+
+const all = document.getElementById('all');
+all.addEventListener('click', ()=>{
+    location.href="all.html";
+});
