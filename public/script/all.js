@@ -1,6 +1,7 @@
 import { getCurrentUser, getUser } from "./modules/users.js";
 import { getAccess, checkAccess } from "./modules/access.js";
 import { logout } from "./modules/logout.js";
+import { message } from "./modules/message.js";
 
 // HTML-elements
 const user = document.getElementById('user');
@@ -103,9 +104,17 @@ copyBtn.addEventListener("click", async () => {
 }); */
 
 copyBtn.addEventListener('click', async ()=>{
+  
+  // Check to make sure two playlists are selected
+  if(copyIds.from === "" || copyIds.to === ""){
+    message("Select two playlists!");
+    return;
+  } 
+
   // Check to make sure you're not copying to the same list
   if(copyIds.from === copyIds.to){
-    alert("Can't copy to the same list");
+    message("Can't copy to the same playlist!");
+    return;
   }
 
   let copyFrom = await getTracks(copyIds.from);
@@ -315,7 +324,6 @@ async function copyList(fromList, toList, toId) {
   let fromTracks = [];
   let toTracks = [];
   let copyTracks = [];
-  console.log(fromList);
 
   // Get all tracks in the from-list
   for (let item of fromList) {
@@ -329,7 +337,7 @@ async function copyList(fromList, toList, toId) {
 
   // Compare lists (if the to-list is not empty)
   if (toTracks.length > 0) {
-    for (track of fromTracks) {
+    for (let track of fromTracks) {
       if (!toTracks.includes(track)) {
         copyTracks.push(track);
       }
@@ -339,7 +347,8 @@ async function copyList(fromList, toList, toId) {
   }
 
   if (copyTracks.length === 0) {
-    msg.innerHTML = "Playlist already up to date.";
+    //msg.innerHTML = "Playlist already up to date.";
+    message("Playlist already up to date.");
     return;
   } else {
     // Max 100 tracks to add at once
@@ -376,7 +385,8 @@ async function addTracks(trackList, listId) {
       console.log(res.status);
       throw `Error adding tracks ${res.status}`;
     } else {
-      msg.innerHTML = "Playlist updated successfully!";
+      //msg.innerHTML = "Playlist updated successfully!";
+      message("Playlist updated successfully!");
     }
   } catch (err) {
     console.log(err);
