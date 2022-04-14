@@ -14,12 +14,31 @@
     padding: 0;
 }
 
+header{
+    height: 5rem;
+    background-color: red;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    font-size: 72pt;
+    font-weight: 700;
+}
+
+p{
+    font-size: 18pt;
+    font-weight: 400;
+    margin: 2rem 0;
+}
+
 .container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 5rem);
 }
 
 body{
@@ -40,4 +59,13 @@ button{
 button:hover{
     scale: 1.05;
     transition: .3s;
+}
+
+/* ===== Login page ===== */ 
+#loginBtn{
+    margin-top: 2rem;
+    width: 230px;
+    height: 60px;
+    border-radius: 30px;
+    
 }

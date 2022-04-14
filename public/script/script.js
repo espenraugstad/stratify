@@ -32,7 +32,7 @@ async function getAccessToken() {
       localStorage.setItem("access", data.access_token);
       localStorage.setItem("refresh", data.refresh_token);
       //Where to go after login
-      window.location.href = "all.html";
+      window.location.href = "home.html";
     }
   } catch (err) {
     console.log("Ooops");
