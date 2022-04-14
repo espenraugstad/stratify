@@ -1,3 +1,6 @@
+import { getCurrentUser } from "./modules/users.js";
+import { getAccess, checkAccess } from "./modules/access.js";
+
 // HTML-elements
 const currentUser = document.getElementById("currentUser");
 const logout = document.getElementById("logout");
@@ -26,7 +29,7 @@ const YEAR = [
 ];
 
 // Access token
-let access = null;
+/* let access = null;
 
 function checkAccess() {
   access = localStorage.getItem("access");
@@ -35,11 +38,11 @@ function checkAccess() {
   } else {
     window.location.href = "index.html";
   }
-}
+} */
 
 window.onload = function () {
   checkAccess();
-  getCurrentUser();
+  currentUser.innerHTML = `${getCurrentUser()}`;
   getPlaylists(0);
 };
 
@@ -94,7 +97,7 @@ async function getPlaylists(offset) {
     method: "GET",
     headers: {
       "content-type": "application/json",
-      Authorization: "Bearer " + access,
+      Authorization: "Bearer " + getAccess(),
     },
   };
 
@@ -134,7 +137,7 @@ async function getUser(user_id) {
     method: "GET",
     headers: {
       "content-type": "application/json",
-      Authorization: "Bearer " + access,
+      Authorization: "Bearer " + getAccess(),
     },
   };
 
@@ -155,7 +158,7 @@ async function getUser(user_id) {
   }
 }
 
-async function getCurrentUser() {
+/* async function getCurrentUser() {
   const url = "https://api.spotify.com/v1/me";
 
   const cfg = {
@@ -180,7 +183,7 @@ async function getCurrentUser() {
   } catch (err) {
     console.log(err);
   }
-}
+} */
 
 async function getTracks(playlistId) {
   let max = false;
@@ -193,7 +196,7 @@ async function getTracks(playlistId) {
       method: "GET",
       headers: {
         "content-type": "application/json",
-        Authorization: "Bearer " + access,
+        Authorization: "Bearer " + getAccess(),
       },
     };
 
@@ -271,7 +274,7 @@ async function addTracks(trackList, listId) {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      Authorization: "Bearer " + access,
+      Authorization: "Bearer " + getAccess(),
     },
     body: JSON.stringify(trackList),
   };
@@ -305,7 +308,7 @@ async function refresh() {
     let res = await fetch(url, cfg);
     let data = await res.json();
     if (res.status === 200) {
-      localStorage.setItem("access".data.access_token);
+      localStorage.setItem("access",data.access_token);
       window.location.href = "dashboard.html";
     } else {
       throw data.error;
@@ -315,13 +318,3 @@ async function refresh() {
     console.log(err);
   }
 }
-
-// Log out
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  localStorage.removeItem("access");
-  localStorage.removeItem("refresh");
-  localStorage.removeItem("user");
-
-  window.location.replace("index.html");
-  window.location.href = "index.html";
-});

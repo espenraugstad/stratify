@@ -16,11 +16,31 @@
 
 header{
     height: 5rem;
-    background-color: red;
-    padding: 0 2rem;
+/*     background-color: red;
+ */    padding: 0 2rem;
     display: flex;
     align-items: center;
 }
+
+.dropdown-logout{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdown-logout:hover #logoutBtn{
+    display: flex;
+    width: 100%;
+    padding: .5rem;
+}
+
+#logoutBtn{
+    background-color: var(--color-button);
+    display: none;
+    position: absolute;
+}
+
+
 
 h1{
     font-size: 72pt;
