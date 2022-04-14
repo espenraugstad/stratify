@@ -1,16 +1,21 @@
-import { getCurrentUser } from "./modules/users.js";
+import { getCurrentUser, getUser } from "./modules/users.js";
 import { getAccess, checkAccess } from "./modules/access.js";
+import { logout } from "./modules/logout.js";
 
 // HTML-elements
-const currentUser = document.getElementById("currentUser");
-const logout = document.getElementById("logout");
-const followedPlaylists = document.getElementById("followedPlaylists");
-const latest = document.getElementById("latest");
-const ownedPlaylists = document.getElementById("ownedPlaylists");
-const followed = document.getElementById("followed");
-const owned = document.getElementById("owned");
-const copyBtn = document.getElementById("copyBtn");
-const msg = document.getElementById("msg");
+const user = document.getElementById('user');
+/* const followedPlaylists = document.getElementById("followedPlaylists"); */
+/* const latest = document.getElementById("latest"); */
+/* const ownedPlaylists = document.getElementById("ownedPlaylists"); */
+/* const followed = document.getElementById("followed"); */
+/* const owned = document.getElementById("owned"); */
+const copyBtn = document.getElementById("copy-button");
+/* const msg = document.getElementById("msg"); */
+
+/* const copyFrom = document.getElementById('copy-from'); */
+const copyFromLists = document.getElementById('copy-from-lists');
+const copyToLists = document.getElementById('copy-to-lists');
+const showAll = document.getElementById('show-all');
 
 // Global variables and constants
 const YEAR = [
@@ -28,6 +33,11 @@ const YEAR = [
   "Dec",
 ];
 
+let copyIds = {
+  from: '',
+  to: '',
+}
+
 // Access token
 /* let access = null;
 
@@ -41,12 +51,14 @@ function checkAccess() {
 } */
 
 window.onload = function () {
+  showAll.checked = false;
+  /* copyFromLists.innerHTML = '';
+  copyToLists.innerHTML = ''; */
   checkAccess();
-  currentUser.innerHTML = `${getCurrentUser()}`;
   getPlaylists(0);
 };
 
-followed.addEventListener("change", async () => {
+/* followed.addEventListener("change", async () => {
   let followedTracks = await getTracks(followed.selectedOptions[0].value);
 
   const lastTracks = 10;
@@ -88,6 +100,25 @@ copyBtn.addEventListener("click", async () => {
   } else {
     msg.innerHTML = "Select two playlists";
   }
+}); */
+
+copyBtn.addEventListener('click', async ()=>{
+  // Check to make sure you're not copying to the same list
+  if(copyIds.from === copyIds.to){
+    alert("Can't copy to the same list");
+  }
+
+  let copyFrom = await getTracks(copyIds.from);
+  let copyTo = await getTracks(copyIds.to);
+  await copyList(copyFrom, copyTo, copyIds.to);
+
+});
+
+// Show all list will include lists the user owns
+showAll.addEventListener('change', ()=>{
+  copyFromLists.innerHTML = '';
+  copyToLists.innerHTML = '';
+  getPlaylists(0);
 });
 
 async function getPlaylists(offset) {
@@ -107,9 +138,66 @@ async function getPlaylists(offset) {
       refresh();
     }
     let data = await res.json();
+    for (let list of data.items) {
+      let listId = list.id;
+      // Add list to copy from
+      if(showAll.checked || list.owner.id !== localStorage.getItem("user")){
+        let newFromDiv = document.createElement('div');
+      
+        let listName = document.createElement('span');
+        let listOwner = document.createElement('span');
 
-    for (list of data.items) {
-      let opt = document.createElement("option");
+        listName.innerHTML = list.name;
+        listOwner.innerHTML = list.owner.display_name;
+        newFromDiv.appendChild(listName);
+        newFromDiv.appendChild(listOwner);
+        newFromDiv.classList.add('playlist-list');
+        copyFromLists.appendChild(newFromDiv);
+
+        
+
+        newFromDiv.addEventListener('click', (e)=>{
+          copyIds.from = listId;
+  
+          // Remove any existing selected-classes
+          let currentlySelected = document.querySelectorAll('.selected-playlist-from');
+          currentlySelected.forEach(e => e.classList.remove('selected-playlist-from'));
+  
+          // Add selected class for this particular playlist
+          newFromDiv.classList.add('selected-playlist-from');
+        });
+      }
+
+
+      // Add only owners lists to copy to
+      if(list.owner.id === localStorage.getItem("user")){
+        let newToDiv = document.createElement('div');
+      
+        let listName = document.createElement('span');
+        let listOwner = document.createElement('span');
+
+        listName.innerHTML = list.name;
+        listOwner.innerHTML = list.owner.display_name;
+        newToDiv.appendChild(listName);
+        newToDiv.appendChild(listOwner);
+        newToDiv.classList.add('playlist-list');
+        copyToLists.appendChild(newToDiv);
+
+        newToDiv.addEventListener('click', (e)=>{
+          copyIds.to = listId;
+  
+          // Remove any existing selected-classes
+          let currentlySelected = document.querySelectorAll('.selected-playlist-to');
+          currentlySelected.forEach(e => e.classList.remove('selected-playlist-to'));
+  
+          // Add selected class for this particular playlist
+          newToDiv.classList.add('selected-playlist-to');
+        });
+      }
+
+      
+
+      /* let opt = document.createElement("option");
       opt.value = list.id;
       opt.text = `${list.name} by ${list.owner.display_name}`;
 
@@ -119,7 +207,7 @@ async function getPlaylists(offset) {
       } else {
         opt.text = `${list.name}`;
         owned.add(opt, null);
-      }
+      } */
     }
 
     if (data.items.length >= 50) {
@@ -130,7 +218,7 @@ async function getPlaylists(offset) {
   }
 }
 
-async function getUser(user_id) {
+/* async function getUser(user_id) {
   const url = `https://api.spotify.com/v1/users/${user_id}`;
 
   const cfg = {
@@ -157,7 +245,7 @@ async function getUser(user_id) {
     console.log(err);
   }
 }
-
+ */
 /* async function getCurrentUser() {
   const url = "https://api.spotify.com/v1/me";
 
@@ -227,14 +315,15 @@ async function copyList(fromList, toList, toId) {
   let fromTracks = [];
   let toTracks = [];
   let copyTracks = [];
+  console.log(fromList);
 
   // Get all tracks in the from-list
-  for (item of fromList) {
+  for (let item of fromList) {
     fromTracks.push(item.track.uri);
   }
 
   // Get all tracks in the to list
-  for (item of toList) {
+  for (let item of toList) {
     toTracks.push(item.track.uri);
   }
 
@@ -267,7 +356,7 @@ async function copyList(fromList, toList, toId) {
 }
 
 async function addTracks(trackList, listId) {
-  console.log(trackList);
+  //console.log(trackList);
   const url = `https://api.spotify.com/v1/playlists/${listId}/tracks`;
 
   const cfg = {
@@ -318,3 +407,8 @@ async function refresh() {
     console.log(err);
   }
 }
+
+getCurrentUser().then((userName) => {
+  user.innerHTML = userName;
+});
+document.getElementById("logoutBtn").addEventListener("click", logout);

@@ -4,6 +4,7 @@
     --color-green: #1F9764;
     --color-button: #808080;
     --color-background: #484848;
+    --color-darker: #575757;
     --color-light: white;
 }
 
@@ -82,6 +83,8 @@ button{
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 30px;
 }
 
 button:hover{
@@ -117,4 +120,67 @@ button:hover{
     display: flex;
     text-align: center;
     cursor: pointer;
+}
+
+/* ==== All ==== */
+#all-container{
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+.playlists{
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    column-gap: 3rem;
+    width: 75%;
+    justify-items: center;
+    
+}
+
+#copy-from, #copy-to{
+    /* border: 1px solid white; */
+    width: 500px;
+    padding-bottom: 2rem;
+    margin: 1.5rem 0;
+
+}
+
+#copy-from h2, #copy-to h2{
+    font-size: 24pt;
+}
+
+#copy-to-lists{
+    margin-top: 0;
+}
+
+#show-all{
+    margin: .5rem .25rem 1.5rem 0;
+}
+
+.select-all{
+    height: 50px;
+}
+
+.playlist-list{
+    background-color: var(--color-darker);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    overflow: scroll;
+    cursor: pointer;
+}
+
+.playlist-list span:nth-child(1){
+    font-size: 18pt;
+    font-weight: 700;
+}
+
+.selected-playlist-from, .selected-playlist-to{
+    background-color: red;
+}
+
+#copy-button{
+    position: sticky;
+    top: 75vh;
 }

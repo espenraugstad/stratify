@@ -5,22 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="./css/all.css">
+  
     <title>Stratify</title>
   </head>
   <body>
     <header>
-      <div id="dashHead">
-        <span id="currentUser">You're not logged in</span><br />
-        <button id="logoutBtn">Log out</button>
+      <div class="dropdown-logout">
+        <div id="user">You are not logged in</div>
+        <div class="dropdown-content" id="logoutBtn">Logout</div>
       </div>
     </header>
-    <div class="container">
+
+    <div class="container" id="all-container">
       
       <h1>Select Playlists</h1> 
+      <div class="playlists">
+        <div id="copy-from">
+          <h2>I want to copy from this list...</h2>
+          <div class="select-all">
+            <input id="show-all" type="checkbox" />
+            <label for="show-all"> Show all my lists </label>
+          </div>
+          <div id="copy-from-lists"></div>
+        </div>
+
+        <div><button id="copy-button" class="button">Copy</button>  
+          </div>
+
+        <div id="copy-to">
+          <h2>...to this list</h2>
+          <div class="select-all"></div>
+          <div id="copy-to-lists"></div>
+        </div>
+      </div>
       
 
-      <h2>Playlists</h2>
+     <!--  <h2>Playlists</h2>
       <div id="followedPlaylists">
         <label for="followed">Playlists I follow</label>
         <select name="following" id="followed">
@@ -41,7 +61,7 @@
       </div>
       <br />
       <div id="msg"></div>
-    </div>
+    </div> -->
 
     <script src="./script/all.js" type="module"></script>
   </body>
