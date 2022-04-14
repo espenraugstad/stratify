@@ -4,7 +4,7 @@ import { logout } from "./modules/logout.js";
 const user = document.getElementById("user");
 
 getCurrentUser().then((userName) => {
-  user.innerHTML = userName + " &#9660;";
+  user.innerHTML = userName;
 });
 
 

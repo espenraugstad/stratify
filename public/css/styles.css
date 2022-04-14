@@ -22,6 +22,14 @@ header{
     align-items: center;
 }
 
+#user::after{
+    content: " \25BC";
+}
+
+#user:hover::after{
+    content: " \25B2";
+}
+
 .dropdown-logout{
     position: relative;
     display: inline-block;
