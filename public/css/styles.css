@@ -31,6 +31,7 @@ header{
 #logo>a{
     text-decoration: none;
     color: white;
+    letter-spacing: .12rem;
 }
 
 #right-side{
@@ -38,10 +39,18 @@ header{
     font-size: 14pt;
 }
 
-#right-side a {
+#right-side>a {
     text-decoration: none;
     color: white;
     margin-right: 2rem;
+}
+
+#right-side>a:hover{
+    font-weight: 700;
+}
+
+#user{
+    height: 1.5rem;
 }
 
 #user::after{
@@ -62,12 +71,21 @@ header{
     display: flex;
     width: 100%;
     padding: .5rem;
+    margin-top: 1.5rem;
 }
 
 #logoutBtn{
     background-color: var(--color-button);
     display: none;
     position: absolute;
+}
+
+#logoutBtn:hover ~ #user::after{
+    content: " \25B2";
+}
+
+#logoutBtn:hover{
+    font-weight: 700;
 }
 
 
