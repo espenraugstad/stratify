@@ -28,6 +28,11 @@ header{
     font-weight: 900;
 }
 
+#logo>a{
+    text-decoration: none;
+    color: white;
+}
+
 #right-side{
     display: flex;
     font-size: 14pt;
