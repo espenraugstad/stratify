@@ -3,6 +3,7 @@ import { logout } from "./modules/logout.js";
 
 const user = document.getElementById("user");
 
+// Get the current username and put in the header
 getCurrentUser().then((userName) => {
   user.innerHTML = userName;
 });
