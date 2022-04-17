@@ -1,8 +1,9 @@
 import { getCurrentUser } from "./modules/userHandler.js";
-import { getAccess, checkAccess } from "./modules/access.js";
+import { getAccess, checkAccess, refresh } from "./modules/accessHandler.js";
 import { logout } from "./modules/logout.js";
 import { message } from "./modules/message.js";
 import { getPlaylists } from "./modules/playlistHandler.js";
+import { getTracks, addTracks } from "./modules/trackHandler.js";
 
 // HTML-elements
 const user = document.getElementById('user'); 
@@ -134,45 +135,6 @@ async function listPlaylists(offset){
   }
 }
 
-
-async function getTracks(playlistId) {
-  let max = false;
-  let offset = 0;
-  let tracks = [];
-
-  while (!max) {
-    const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?offset=${offset}`;
-    const cfg = {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + getAccess(),
-      },
-    };
-
-    try {
-      let res = await fetch(url, cfg);
-      if (res.status === 401) {
-        refresh();
-      } else if (res.status !== 200) {
-        console.log(res.status);
-        throw `Error ${res.status}`;
-      } else {
-        let data = await res.json();
-        tracks = tracks.concat(data.items);
-        if (data.items.length === 100) {
-          offset += 100;
-        } else {
-          max = true;
-          return tracks;
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-}
-
 async function copyList(fromList, toList, toId) {
   let fromTracks = [];
   let toTracks = [];
@@ -214,60 +176,6 @@ async function copyList(fromList, toList, toId) {
     } else {
       await addTracks(copyTracks, toId);
     }
-  }
-}
-
-async function addTracks(trackList, listId) {
-  //console.log(trackList);
-  const url = `https://api.spotify.com/v1/playlists/${listId}/tracks`;
-
-  const cfg = {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      Authorization: "Bearer " + getAccess(),
-    },
-    body: JSON.stringify(trackList),
-  };
-
-  try {
-    let res = await fetch(url, cfg);
-    if (res.status === 401) {
-      refresh();
-    } else if (res.status !== 201) {
-      console.log(res.status);
-      throw `Error adding tracks ${res.status}`;
-    } else {
-      //msg.innerHTML = "Playlist updated successfully!";
-      message("Playlist updated successfully!");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-// Get refresh-token
-async function refresh() {
-  const refreshToken = localStorage.getItem("refresh");
-  const url = "/refreshToken";
-  const cfg = {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ token: localStorage.getItem("refresh") }),
-  };
-
-  try {
-    let res = await fetch(url, cfg);
-    let data = await res.json();
-    if (res.status === 200) {
-      localStorage.setItem("access",data.access_token);
-      window.location.href = "dashboard.html";
-    } else {
-      throw data.error;
-    }
-  } catch (err) {
-    console.log("Unable to get refresh token");
-    console.log(err);
   }
 }
 

@@ -1,4 +1,4 @@
-import { getAccess } from "./access.js";
+import { getAccess } from "./accessHandler.js";
 
 export async function getCurrentUser() {
     const url = "https://api.spotify.com/v1/me";
