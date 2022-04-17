@@ -1,4 +1,4 @@
-import { getCurrentUser } from "./modules/users.js";
+import { getCurrentUser } from "./modules/userHandler.js";
 import { logout } from "./modules/logout.js";
 
 const user = document.getElementById("user");
