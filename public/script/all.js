@@ -1,8 +1,8 @@
-import { getCurrentUser } from "./modules/users.js";
+import { getCurrentUser } from "./modules/userHandler.js";
 import { getAccess, checkAccess } from "./modules/access.js";
 import { logout } from "./modules/logout.js";
 import { message } from "./modules/message.js";
-import { getPlaylists } from "./modules/playlists.js";
+import { getPlaylists } from "./modules/playlistHandler.js";
 
 // HTML-elements
 const user = document.getElementById('user'); 
