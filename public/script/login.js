@@ -1,9 +1,11 @@
 window.onload = function () {
+  // If the code is available in the url, get the access token
   if (window.location.search.length > 0) {
     getAccessToken();
   }
 };
 
+// Prevent the back-button on the browser from being used after logout
 window.onpopstate = function(event) {
   alert(`location: ${document.location}, state: ${JSON.stringify(event.state)}`)
 }

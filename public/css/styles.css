@@ -15,6 +15,52 @@
     padding: 0;
 }
 
+/* ===== Common elements ===== */
+
+body{
+    background-color: var(--color-background);
+    color: var(--color-light);
+}
+
+
+h1{
+    font-size: 72pt;
+    font-weight: 700;
+}
+
+p{
+    font-size: 18pt;
+    font-weight: 400;
+    margin: 2rem 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 5rem);
+}
+
+
+button{
+    border: none;
+    background-color: var(--color-green);
+    color: var(--color-light);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+}
+
+button:hover{
+    scale: 1.05;
+    transition: .3s;
+}
+
+/* ===== Header ===== */
 header{
     height: 5rem;
     padding: 0 2rem;
@@ -89,49 +135,11 @@ header{
 }
 
 
-
-h1{
-    font-size: 72pt;
-    font-weight: 700;
-}
-
-p{
-    font-size: 18pt;
-    font-weight: 400;
-    margin: 2rem 0;
-}
-
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 5rem);
-}
-
-body{
-    background-color: var(--color-background);
-    color: var(--color-light);
-}
-
-button{
-    border: none;
-    background-color: var(--color-green);
-    color: var(--color-light);
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    padding: 1rem 2rem;
-    border-radius: 30px;
-}
-
-button:hover{
-    scale: 1.05;
-    transition: .3s;
-}
-
 /* ===== Login page ===== */ 
+#front-tag{
+    text-align: center;
+}
+
 #loginBtn{
     margin-top: 2rem;
     width: fit-content;
