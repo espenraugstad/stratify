@@ -219,7 +219,7 @@ header{
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
-    overflow: scroll;
+    overflow: auto;
     cursor: pointer;
 }
 
