@@ -173,6 +173,9 @@ async function copyList(fromList, toList, toId) {
     fromTracks.push(item.track.uri);
   }
 
+  // Remove potential duplicates in the from-list
+  fromTracks = [...new Set(fromTracks)];
+
   // Get all tracks in the to list
   for (let item of toList) {
     toTracks.push(item.track.uri);
