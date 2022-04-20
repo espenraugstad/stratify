@@ -30,7 +30,7 @@ const YEAR = [
 
 // Ids for playlists to copy from and to
 let copyIds = {
-  from: "",
+  from: [],
   to: "",
 };
 
@@ -43,19 +43,28 @@ window.onload = function () {
 
 addBtn.addEventListener("click", async () => {
   // Check to make sure two playlists are selected
-  if (copyIds.from === "" || copyIds.to === "") {
+  if (copyIds.from.length === 0 || copyIds.to === "") {
     message("Select two playlists!");
     return;
   }
 
   // Check to make sure you're not copying to the same list
-  if (copyIds.from === copyIds.to) {
+
+  if (copyIds.from.includes(copyIds.to)) {
     message("Can't copy to the same playlist!");
     return;
   }
 
-  let copyFrom = await getTracks(copyIds.from);
+  // Compile all tracks from the from-playlists into one array
+  let copyFrom = [];
+
+  for (let i = 0; i < copyIds.from.length; i++) {
+    let theseTracks = await getTracks(copyIds.from[i]);
+    copyFrom = copyFrom.concat(theseTracks);
+  }
+
   let copyTo = await getTracks(copyIds.to);
+
   await copyList(copyFrom, copyTo, copyIds.to);
 });
 
@@ -63,6 +72,10 @@ addBtn.addEventListener("click", async () => {
 showAll.addEventListener("change", () => {
   copyFromLists.innerHTML = "";
   copyToLists.innerHTML = "";
+  copyIds = {
+    from: [],
+    to: "",
+  };
   //getPlaylists(0);
   listPlaylists(0);
 });
@@ -87,18 +100,28 @@ async function listPlaylists(offset) {
       copyFromLists.appendChild(newFromDiv);
 
       newFromDiv.addEventListener("click", (e) => {
-        copyIds.from = listId;
+        // If the listId already exists in the copyIds, remove it, otherwise add it
+        if (copyIds.from.indexOf(listId) === -1) {
+          copyIds.from.push(listId);
+        } else {
+          copyIds.from.splice(copyIds.from.indexOf(listId), 1);
+        }
 
-        // Remove any existing selected-classes
-        let currentlySelected = document.querySelectorAll(
-          ".selected-playlist-from"
-        );
-        currentlySelected.forEach((e) =>
-          e.classList.remove("selected-playlist-from")
-        );
+        // Get the correct element to add/remove the selected class
+        let clickedElement = null;
 
-        // Add selected class for this particular playlist
-        newFromDiv.classList.add("selected-playlist-from");
+        if (e.target.className.includes("playlist-list")) {
+          // Clicked on the div
+          clickedElement = e.target;
+        } else {
+          // Clicked on the span inside the div
+          clickedElement = e.target.parentElement;
+        }
+
+        // Add/remove select-class
+        clickedElement.className.includes("selected")
+          ? clickedElement.classList.remove("selected-playlist-from")
+          : clickedElement.classList.add("selected-playlist-from");
       });
     }
 
@@ -143,6 +166,7 @@ async function copyList(fromList, toList, toId) {
   let fromTracks = [];
   let toTracks = [];
   let copyTracks = [];
+  let success = false;
 
   // Get all tracks in the from-list
   for (let item of fromList) {
@@ -174,11 +198,15 @@ async function copyList(fromList, toList, toId) {
     if (copyTracks.length > 100) {
       // Add chunks of 100 to the array
       for (let i = 0; i < copyTracks.length; i += 100) {
-        //console.log(copyTracks.slice(i, i + 100));
-        await addTracks(copyTracks.slice(i, i + 100), toId);
+        success = await addTracks(copyTracks.slice(i, i + 100), toId);
       }
     } else {
-      await addTracks(copyTracks, toId);
+      success = await addTracks(copyTracks, toId);
+    }
+    if (success) {
+      message("Playlist updated successfully!");
+    } else {
+      message("An error occured, check the console");
     }
   }
 }

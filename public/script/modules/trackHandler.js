@@ -61,9 +61,11 @@ export async function addTracks(trackList, listId) {
       throw `Error adding tracks ${res.status}`;
     } else {
       //msg.innerHTML = "Playlist updated successfully!";
-      message("Playlist updated successfully!");
+      //message("Playlist updated successfully!");
+      return true;
     }
   } catch (err) {
     console.log(err);
+    return false;
   }
 }

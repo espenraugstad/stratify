@@ -172,6 +172,7 @@ header{
     font-size: 1.2rem;
     display: flex;
     text-align: center;
+    align-items: center;
     cursor: pointer;
 }
 

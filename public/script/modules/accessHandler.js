@@ -8,12 +8,12 @@ export function checkAccess() {
 }
 
 export function getAccess() {
-    const access = localStorage.getItem("access"); 
-    if (access && access !== "undefined") {
-        return access;
-      } else {
-        return false;
-      }
+  const access = localStorage.getItem("access");
+  if (access && access !== "undefined") {
+    return access;
+  } else {
+    return false;
+  }
 }
 
 export async function refresh() {
@@ -29,8 +29,8 @@ export async function refresh() {
     let res = await fetch(url, cfg);
     let data = await res.json();
     if (res.status === 200) {
-      localStorage.setItem("access",data.access_token);
-      window.location.href = "dashboard.html";
+      localStorage.setItem("access", data.access_token);
+      window.location.href = "home.html";
     } else {
       throw data.error;
     }
