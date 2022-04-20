@@ -6,11 +6,11 @@ import { getPlaylists } from "./modules/playlistHandler.js";
 import { getTracks, addTracks } from "./modules/trackHandler.js";
 
 // HTML-elements
-const user = document.getElementById('user'); 
-const copyBtn = document.getElementById("copy-button");
-const copyFromLists = document.getElementById('copy-from-lists');
-const copyToLists = document.getElementById('copy-to-lists');
-const showAll = document.getElementById('show-all');
+const user = document.getElementById("user");
+const addBtn = document.getElementById("add-button");
+const copyFromLists = document.getElementById("copy-from-lists");
+const copyToLists = document.getElementById("copy-to-lists");
+const showAll = document.getElementById("show-all");
 
 // Global variables and constants
 const YEAR = [
@@ -30,9 +30,9 @@ const YEAR = [
 
 // Ids for playlists to copy from and to
 let copyIds = {
-  from: '',
-  to: '',
-}
+  from: "",
+  to: "",
+};
 
 window.onload = function () {
   showAll.checked = false;
@@ -41,16 +41,15 @@ window.onload = function () {
   listPlaylists(0);
 };
 
-copyBtn.addEventListener('click', async ()=>{
-  
+addBtn.addEventListener("click", async () => {
   // Check to make sure two playlists are selected
-  if(copyIds.from === "" || copyIds.to === ""){
+  if (copyIds.from === "" || copyIds.to === "") {
     message("Select two playlists!");
     return;
-  } 
+  }
 
   // Check to make sure you're not copying to the same list
-  if(copyIds.from === copyIds.to){
+  if (copyIds.from === copyIds.to) {
     message("Can't copy to the same playlist!");
     return;
   }
@@ -58,73 +57,78 @@ copyBtn.addEventListener('click', async ()=>{
   let copyFrom = await getTracks(copyIds.from);
   let copyTo = await getTracks(copyIds.to);
   await copyList(copyFrom, copyTo, copyIds.to);
-
 });
 
 // Show all list will include lists the user owns
-showAll.addEventListener('change', ()=>{
-  copyFromLists.innerHTML = '';
-  copyToLists.innerHTML = '';
+showAll.addEventListener("change", () => {
+  copyFromLists.innerHTML = "";
+  copyToLists.innerHTML = "";
   //getPlaylists(0);
   listPlaylists(0);
 });
 
-async function listPlaylists(offset){
+async function listPlaylists(offset) {
   let playlists = await getPlaylists(offset);
   for (let list of playlists.items) {
     let listId = list.id;
 
     // Add all playlists in the copy from column
-    if(showAll.checked || list.owner.id !== localStorage.getItem("user")){
-      let newFromDiv = document.createElement('div');
-    
-      let listName = document.createElement('span');
-      let listOwner = document.createElement('span');
+    if (showAll.checked || list.owner.id !== localStorage.getItem("user")) {
+      let newFromDiv = document.createElement("div");
+
+      let listName = document.createElement("span");
+      let listOwner = document.createElement("span");
 
       listName.innerHTML = list.name;
       listOwner.innerHTML = list.owner.display_name;
       newFromDiv.appendChild(listName);
       newFromDiv.appendChild(listOwner);
-      newFromDiv.classList.add('playlist-list');
+      newFromDiv.classList.add("playlist-list");
       copyFromLists.appendChild(newFromDiv);
 
-
-      newFromDiv.addEventListener('click', (e)=>{
+      newFromDiv.addEventListener("click", (e) => {
         copyIds.from = listId;
 
         // Remove any existing selected-classes
-        let currentlySelected = document.querySelectorAll('.selected-playlist-from');
-        currentlySelected.forEach(e => e.classList.remove('selected-playlist-from'));
+        let currentlySelected = document.querySelectorAll(
+          ".selected-playlist-from"
+        );
+        currentlySelected.forEach((e) =>
+          e.classList.remove("selected-playlist-from")
+        );
 
         // Add selected class for this particular playlist
-        newFromDiv.classList.add('selected-playlist-from');
+        newFromDiv.classList.add("selected-playlist-from");
       });
     }
 
-
     // Add only owners lists to copy to
-    if(list.owner.id === localStorage.getItem("user")){
-      let newToDiv = document.createElement('div');
-    
-      let listName = document.createElement('span');
-      let listOwner = document.createElement('span');
+    if (list.owner.id === localStorage.getItem("user")) {
+      let newToDiv = document.createElement("div");
+
+      let listName = document.createElement("span");
+      let listOwner = document.createElement("span");
 
       listName.innerHTML = list.name;
       listOwner.innerHTML = list.owner.display_name;
       newToDiv.appendChild(listName);
       newToDiv.appendChild(listOwner);
-      newToDiv.classList.add('playlist-list');
+      newToDiv.classList.add("playlist-list");
       copyToLists.appendChild(newToDiv);
 
-      newToDiv.addEventListener('click', (e)=>{
+      newToDiv.addEventListener("click", (e) => {
         copyIds.to = listId;
 
         // Remove any existing selected-classes
-        let currentlySelected = document.querySelectorAll('.selected-playlist-to');
-        currentlySelected.forEach(e => e.classList.remove('selected-playlist-to'));
+        let currentlySelected = document.querySelectorAll(
+          ".selected-playlist-to"
+        );
+        currentlySelected.forEach((e) =>
+          e.classList.remove("selected-playlist-to")
+        );
 
         // Add selected class for this particular playlist
-        newToDiv.classList.add('selected-playlist-to');
+        newToDiv.classList.add("selected-playlist-to");
       });
     }
   }

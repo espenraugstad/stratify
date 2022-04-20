@@ -26,6 +26,7 @@ body{
 h1{
     font-size: 72pt;
     font-weight: 700;
+    text-align: center;
 }
 
 p{
@@ -42,6 +43,10 @@ p{
     height: calc(100vh - 5rem);
 }
 
+.text-center{
+    text-align: center;
+}
+
 
 button{
     border: none;
@@ -52,7 +57,11 @@ button{
     cursor: pointer;
     text-transform: uppercase;
     padding: 1rem 2rem;
-    border-radius: 30px;
+    border-radius: 1rem;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
 }
 
 button:hover{
@@ -136,10 +145,6 @@ header{
 
 
 /* ===== Login page ===== */ 
-#front-tag{
-    text-align: center;
-}
-
 #loginBtn{
     margin-top: 2rem;
     width: fit-content;
@@ -150,6 +155,7 @@ header{
 /* ==== Home ==== */
 #home-container{
     justify-content: flex-start;
+    align-items: center;
     padding-top: 2rem;
 }
 
@@ -173,6 +179,7 @@ header{
 #all-container{
     justify-content: flex-start;
     padding-top: 2rem;
+    margin: auto;
 }
 
 #all-container>p{
@@ -182,23 +189,43 @@ header{
 
 .playlists{
     display: grid;
-    grid-template-columns: 1fr 80px 1fr;
+    grid-template-columns: 1fr .5fr 1fr;
     column-gap: 3rem;
-    width: 75%;
     justify-items: center;
+    max-height: fit-content;
+    margin: 0 10rem;
     
+}
+
+@media screen and (max-width: 1000px) {
+    .playlists{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0,1fr) minmax(0,.5fr) minmax(0,1fr);
+        column-gap: 3rem;
+        justify-items: center;
+        max-height: fit-content;
+        margin: 0 10rem;
+    }
 }
 
 #copy-from, #copy-to{
     /* border: 1px solid white; */
-    width: 500px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 100%;
     padding-bottom: 2rem;
     margin: 1.5rem 0;
-
 }
 
 #copy-from h2, #copy-to h2{
     font-size: 24pt;
+}
+
+#copy-from-lists, #copy-to-lists{
+    max-height: 50vh;
+    
+    overflow-y: auto;
 }
 
 #copy-to-lists{
@@ -233,7 +260,9 @@ header{
 }
 
 
-#copy-button{
-    position: sticky;
-    top: 75vh;
+#add-button{
+    /* position: sticky;
+    top: 75vh; */
+    align-self: center;
+
 }
