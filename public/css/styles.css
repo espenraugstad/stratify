@@ -7,6 +7,7 @@
     --color-darker: #575757;
     --color-light-grey: #c5c5c5;
     --color-light: white;
+    --color-red: rgb(175, 0, 0);
 }
 
 *{
@@ -82,6 +83,10 @@ button:hover{
     text-align: center;
     align-items: center;
     cursor: pointer;
+}
+
+.cancel{
+    background-color: var(--color-red);
 }
 
 /* ===== Header ===== */

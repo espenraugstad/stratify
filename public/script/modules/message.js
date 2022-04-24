@@ -1,4 +1,4 @@
-export function message(messageText){
+export function message(messageText, cancel){
     const header = document.querySelector('header');
     const container = document.querySelector('.container');
 
@@ -22,12 +22,34 @@ export function message(messageText){
     
     // Add content to the message box
     messageBox.innerHTML = messageText;
+
+    // Add the button area to the message box
+    let btnArea = document.createElement('div');
+    messageBox.appendChild(btnArea);
+
+    btnArea.style.display = "flex";
+    btnArea.style.width = "100%";
     
-    // Add dismissbutton
-    let dismissBtn = document.createElement('button');
-    dismissBtn.style.marginTop = "2rem";
-    dismissBtn.innerHTML = "OK";
-    messageBox.appendChild(dismissBtn);
+
+    let cancelBtn = document.createElement('button');
+    if(cancel){
+        // Add a cancel button
+        cancelBtn.style.marginTop = "2rem";
+        cancelBtn.innerHTML = "Cancel";
+        cancelBtn.classList.add("cancel");
+        btnArea.appendChild(cancelBtn);
+        btnArea.style.justifyContent = "space-between";
+    } else {
+        btnArea.style.justifyContent = "center";
+    }
+
+    // Add the OK button
+    let okBtn = document.createElement('button');
+    okBtn.style.marginTop = "2rem";
+    okBtn.innerHTML = "OK";
+    btnArea.appendChild(okBtn);
+
+    
 
      // Fade out other elements
     header.style.filter = "opacity(0.2)";
@@ -37,12 +59,24 @@ export function message(messageText){
     document.body.prepend(messageBox);
     messageBox.style.filter = "none";
 
-   
-
-    messageBox.addEventListener('click', ()=>{
+    cancelBtn.addEventListener('click', ()=>{
         header.style.filter = "none";
         container.style.filter = "none";
         messageBox.remove();
-        
+        return false;
     });
+
+    okBtn.addEventListener('click', ()=>{
+        header.style.filter = "none";
+        container.style.filter = "none";
+        messageBox.remove();
+        return true;
+    });
+
+    /* messageBox.addEventListener('click', ()=>{
+        //header.style.filter = "none";
+        //container.style.filter = "none";
+        messageBox.remove();
+        
+    }); */
 }

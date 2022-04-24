@@ -193,8 +193,7 @@ async function copyList(fromList, toList, toId) {
   }
 
   if (copyTracks.length === 0) {
-    //msg.innerHTML = "Playlist already up to date.";
-    message("Playlist already up to date.");
+    message("Playlist already up to date.", false);
     return;
   } else {
     // Max 100 tracks to add at once
