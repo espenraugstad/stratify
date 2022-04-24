@@ -1,7 +1,7 @@
 import { getCurrentUser } from "./modules/userHandler.js";
 import { getAccess, checkAccess, refresh } from "./modules/accessHandler.js";
 import { logout } from "./modules/logout.js";
-import { message } from "./modules/message.js";
+import { inputMessage, message } from "./modules/message.js";
 import { getPlaylists } from "./modules/playlistHandler.js";
 import { getTracks, addTracks } from "./modules/trackHandler.js";
 
@@ -11,6 +11,7 @@ const addBtn = document.getElementById("add-button");
 const copyFromLists = document.getElementById("copy-from-lists");
 const copyToLists = document.getElementById("copy-to-lists");
 const showAll = document.getElementById("show-all");
+const newPlaylist = document.getElementById('newPlaylist');
 
 // Global variables and constants
 const YEAR = [
@@ -40,6 +41,17 @@ window.onload = function () {
   checkAccess();
   listPlaylists(0);
 };
+
+newPlaylist.addEventListener('click', async ()=>{
+  console.log('Adding new playlist');
+  let name = "";
+  try{
+    name = await inputMessage("Enter playlist name");
+    // Actually add the playlist.
+  } catch {
+    message("Playlist name can not be empty.", false);
+  }
+});
 
 addBtn.addEventListener("click", async () => {
   // Check to make sure two playlists are selected
