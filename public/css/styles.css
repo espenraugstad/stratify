@@ -5,6 +5,7 @@
     --color-button: #808080;
     --color-background: #484848;
     --color-darker: #575757;
+    --color-light-grey: #c5c5c5;
     --color-light: white;
 }
 
@@ -24,13 +25,13 @@ body{
 
 
 h1{
-    font-size: 72pt;
+    font-size: 72px;
     font-weight: 700;
     text-align: center;
 }
 
 p{
-    font-size: 18pt;
+    font-size: 18px;
     font-weight: 400;
     margin: 2rem 0;
 }
@@ -69,6 +70,20 @@ button:hover{
     transition: .3s;
 }
 
+.button-box{
+    background-color: var(--color-button);
+    margin: 0 2rem;
+    background-color: var(--color-button);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 250px;
+    font-size: 1.2rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 /* ===== Header ===== */
 header{
     height: 5rem;
@@ -79,7 +94,7 @@ header{
 }
 
 #logo{
-    font-size: 20pt;
+    font-size: 30px;
     font-weight: 900;
 }
 
@@ -91,7 +106,7 @@ header{
 
 #right-side{
     display: flex;
-    font-size: 14pt;
+    font-size: 18px;
 }
 
 #right-side>a {
@@ -163,19 +178,6 @@ header{
     display: flex;
 }
 
-.menu-item{
-    margin: 0 2rem;
-    background-color: var(--color-button);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    max-width: 250px;
-    font-size: 1.2rem;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    cursor: pointer;
-}
-
 /* ==== All ==== */
 #all-container{
     justify-content: flex-start;
@@ -184,7 +186,7 @@ header{
 }
 
 #all-container>p{
-    margin: 4rem 0;
+    margin: 2rem 0;
     font-style: italic;
 }
 
@@ -220,7 +222,7 @@ header{
 }
 
 #copy-from h2, #copy-to h2{
-    font-size: 24pt;
+    font-size: 30px;
 }
 
 #copy-from-lists, #copy-to-lists{
@@ -252,8 +254,12 @@ header{
 }
 
 .playlist-list span:nth-child(1){
-    font-size: 18pt;
+    font-size: 24px;
     font-weight: 700;
+}
+
+.playlist-list span:nth-child(2){
+    color: var(--color-light-grey);
 }
 
 .selected-playlist-from, .selected-playlist-to{
