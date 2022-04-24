@@ -44,14 +44,14 @@ window.onload = function () {
 addBtn.addEventListener("click", async () => {
   // Check to make sure two playlists are selected
   if (copyIds.from.length === 0 || copyIds.to === "") {
-    message("Select two playlists!");
+    message("Select two playlists!", false);
     return;
   }
 
   // Check to make sure you're not copying to the same list
 
   if (copyIds.from.includes(copyIds.to)) {
-    message("Can't copy to the same playlist!");
+    message("Can't copy to the same playlist!", false);
     return;
   }
 
@@ -194,6 +194,8 @@ async function copyList(fromList, toList, toId) {
 
   if (copyTracks.length === 0) {
     message("Playlist already up to date.", false);
+  
+    
     return;
   } else {
     // Max 100 tracks to add at once
@@ -206,9 +208,9 @@ async function copyList(fromList, toList, toId) {
       success = await addTracks(copyTracks, toId);
     }
     if (success) {
-      message("Playlist updated successfully!");
+      message("Playlist updated successfully!", false);
     } else {
-      message("An error occured, check the console");
+      message("An error occured, check the console.", false);
     }
   }
 }

@@ -9,10 +9,12 @@ export function message(messageText, cancel){
     messageBox.style.zIndex = "10000";
     messageBox.style.padding = "4rem";
     messageBox.style.backgroundColor = "#575757";
-    messageBox.style.position = "fixed";
-    messageBox.style.top = "200px";
-    messageBox.style.left = "calc(50vw - 250px)";
-    messageBox.style.width = "fit-content";
+    messageBox.style.position = "absolute";
+    messageBox.style.top = "6rem";
+    messageBox.style.left = "50%";
+    messageBox.style.transform = "translateX(-50%)";
+    messageBox.style.maxWidth = "50vw";
+    messageBox.style.margin = "auto";
     messageBox.style.display = "flex";
     messageBox.style.flexDirection = "column";
     messageBox.style.justifyContent = "center";
@@ -38,7 +40,7 @@ export function message(messageText, cancel){
         cancelBtn.innerHTML = "Cancel";
         cancelBtn.classList.add("cancel");
         btnArea.appendChild(cancelBtn);
-        btnArea.style.justifyContent = "space-between";
+        btnArea.style.justifyContent = "space-around";
     } else {
         btnArea.style.justifyContent = "center";
     }
