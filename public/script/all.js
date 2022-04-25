@@ -48,6 +48,7 @@ newPlaylist.addEventListener('click', async ()=>{
     let playlistCreated = await createPlaylist(name);
     if(playlistCreated){
       listPlaylists(0);
+      
     } else {
       message("An error occured. Check the console.", false);
     }
@@ -58,6 +59,7 @@ newPlaylist.addEventListener('click', async ()=>{
 });
 
 addBtn.addEventListener("click", async () => {
+  console.log(copyIds);
   // Check to make sure two playlists are selected
   if (copyIds.from.length === 0 || copyIds.to === "") {
     message("Select two playlists!", false);
@@ -92,12 +94,13 @@ showAll.addEventListener("change", () => {
     from: [],
     to: "",
   };
-  //getPlaylists(0);
   listPlaylists(0);
 });
 
 async function listPlaylists(offset) {
   if(offset === 0){
+    copyIds.to = "";
+    copyIds.from = [];
     copyFromLists.innerHTML = "";
     copyToLists.innerHTML = "";
   }
