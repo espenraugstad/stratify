@@ -15,3 +15,8 @@ const all = document.getElementById('all');
 all.addEventListener('click', ()=>{
     location.href="all.html";
 });
+
+const deleteBtn = document.getElementById("delete");
+deleteBtn.addEventListener('click', ()=>{
+  location.href = "delete.html";
+})
