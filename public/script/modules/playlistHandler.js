@@ -1,5 +1,32 @@
 import { getAccess, refresh } from "./accessHandler.js";
 
+export async function deletePlaylists(listsToDelete){
+  for(let list of listsToDelete){
+    console.log(list.id);
+    const url = `https://api.spotify.com/v1/playlists/${list.id}/followers`;
+
+    const cfg = {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + getAccess(),
+      }
+    };
+
+    try{
+      let response = await fetch(url, cfg);
+      if(response.status !== 200){
+        throw `Could not delete playlist ${list.name}, error ${response.status}`;
+      
+      }
+    } catch (err){
+      console.log(err);
+      return false;
+    }
+  }
+  return true;
+}
+
 export async function createPlaylist(name) {
   console.log("Creating playlist " + name);
 

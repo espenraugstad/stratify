@@ -1,12 +1,10 @@
-import { getCurrentUser } from "./modules/userHandler.js";
+import { header } from "./modules/header.js";
 import { checkAccess } from "./modules/accessHandler.js";
-import { logout } from "./modules/logout.js";
 import { inputMessage, message } from "./modules/message.js";
 import { getPlaylists, createPlaylist } from "./modules/playlistHandler.js";
 import { getTracks, addTracks } from "./modules/trackHandler.js";
 
 // HTML-elements
-const user = document.getElementById("user");
 const addBtn = document.getElementById("add-button");
 const copyFromLists = document.getElementById("copy-from-lists");
 const copyToLists = document.getElementById("copy-to-lists");
@@ -36,8 +34,8 @@ let copyIds = {
 };
 
 window.onload = function () {
+  header();
   showAll.checked = false;
-
   checkAccess();
   listPlaylists(0);
 };
@@ -47,7 +45,6 @@ newPlaylist.addEventListener('click', async ()=>{
   try{
     name = await inputMessage("Enter playlist name");
     // Actually add the playlist.
-
     let playlistCreated = await createPlaylist(name);
     if(playlistCreated){
       listPlaylists(0);
@@ -239,7 +236,3 @@ async function copyList(fromList, toList, toId) {
   }
 }
 
-getCurrentUser().then((userName) => {
-  user.innerHTML = userName;
-});
-document.getElementById("logoutBtn").addEventListener("click", logout);

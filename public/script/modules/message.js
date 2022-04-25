@@ -88,7 +88,8 @@ export function inputMessage(messageText) {
 }
 
 export function message(messageText, cancel) {
-  const header = document.querySelector("header");
+  return new Promise((res, rej) =>{
+    const header = document.querySelector("header");
   const container = document.querySelector(".container");
 
   // Create a new div for the modal window
@@ -152,13 +153,15 @@ export function message(messageText, cancel) {
     header.style.filter = "none";
     container.style.filter = "none";
     messageBox.remove();
-    return false;
+    res(false);
   });
 
   okBtn.addEventListener("click", () => {
     header.style.filter = "none";
     container.style.filter = "none";
     messageBox.remove();
-    return true;
+    res(true);
   });
+  });
+  
 }
