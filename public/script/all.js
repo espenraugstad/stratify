@@ -1,8 +1,8 @@
 import { getCurrentUser } from "./modules/userHandler.js";
-import { getAccess, checkAccess, refresh } from "./modules/accessHandler.js";
+import { checkAccess } from "./modules/accessHandler.js";
 import { logout } from "./modules/logout.js";
 import { inputMessage, message } from "./modules/message.js";
-import { getPlaylists } from "./modules/playlistHandler.js";
+import { getPlaylists, createPlaylist } from "./modules/playlistHandler.js";
 import { getTracks, addTracks } from "./modules/trackHandler.js";
 
 // HTML-elements
@@ -43,11 +43,18 @@ window.onload = function () {
 };
 
 newPlaylist.addEventListener('click', async ()=>{
-  console.log('Adding new playlist');
   let name = "";
   try{
     name = await inputMessage("Enter playlist name");
     // Actually add the playlist.
+
+    let playlistCreated = await createPlaylist(name);
+    if(playlistCreated){
+      listPlaylists(0);
+    } else {
+      message("An error occured. Check the console.", false);
+    }
+    
   } catch {
     message("Playlist name can not be empty.", false);
   }
@@ -93,6 +100,11 @@ showAll.addEventListener("change", () => {
 });
 
 async function listPlaylists(offset) {
+  if(offset === 0){
+    copyFromLists.innerHTML = "";
+    copyToLists.innerHTML = "";
+  }
+
   let playlists = await getPlaylists(offset);
   for (let list of playlists.items) {
     let listId = list.id;
