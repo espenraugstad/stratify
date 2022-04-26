@@ -1,7 +1,10 @@
 # Stratify
 
-Copy songs from playlists you follow to your own playlists. Does not delete songs from the playlist you copy songs to.
+Spotify playlist utility app.
+
+## Features
+* Copy from multiple playlists to another one. Can also create new playlists to copy to. Does not remove or duplicate songs in the target playlist.
+* Can delete multiple playlists at once.
 
 ## Todo
-* Add possibility to copy songs from multiple playlists at once.
-* Add possibility to create new playlist (if possible).
+* Generate random playlists with songs from your existing playlists.
