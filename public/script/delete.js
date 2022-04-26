@@ -2,16 +2,27 @@ import { header } from "./modules/header.js";
 import { message } from "./modules/message.js";
 import { getPlaylists, deletePlaylists } from "./modules/playlistHandler.js";
 
-window.onload = function () {
+window.onload = async function () {
   header();
-
+  await fetchPlaylists(0);
   listPlaylists(0);
+  
 };
 
+let playlists = [];
 const playlistsDiv = document.getElementById("playlists");
 const playlistsToDelete = document.getElementById("playlists-to-delete");
 let listsToDelete = [];
 const deleteListsBtn = document.getElementById('deleteListsBtn');
+
+async function fetchPlaylists(offset){
+  let playlistBatch = await getPlaylists(offset);
+  playlists = playlists.concat(playlistBatch.items);
+  if(playlistBatch.items.length >= 50){
+    await fetchPlaylists(offset + 50);
+  }
+  return true;
+}
 
 async function listPlaylists(offset) {
   if (offset === 0) {
@@ -21,9 +32,9 @@ async function listPlaylists(offset) {
   if(listsToDelete.length === 0){
       playlistsToDelete.innerHTML = "Selected lists will appear here. Click to remove a list.";
   }
-  let playlists = await getPlaylists(offset);
+  //let playlists = await getPlaylists(offset);
 
-  for (let list of playlists.items) {
+  for (let list of playlists) {
     let currentList = list;
 
     // Add all lists that are not to be deleted
@@ -76,10 +87,6 @@ async function listPlaylists(offset) {
       })
     }
   }
-
-  if (playlists.items.length >= 50) {
-    listPlaylists(offset + 50);
-  }
 }
 
 deleteListsBtn.addEventListener('click', async ()=>{
@@ -98,6 +105,8 @@ deleteListsBtn.addEventListener('click', async ()=>{
             let deleted = await deletePlaylists(listsToDelete);
             if(deleted){
                 listsToDelete = [];
+                playlists = [];
+                await fetchPlaylists(0);
                 listPlaylists(0);
             } else {
                 message("An error occured. Check the console.", false);

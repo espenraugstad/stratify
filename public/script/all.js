@@ -59,7 +59,6 @@ newPlaylist.addEventListener('click', async ()=>{
 });
 
 addBtn.addEventListener("click", async () => {
-  console.log(copyIds);
   // Check to make sure two playlists are selected
   if (copyIds.from.length === 0 || copyIds.to === "") {
     message("Select two playlists!", false);
