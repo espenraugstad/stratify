@@ -1,5 +1,4 @@
 import { getAccess, refresh } from "./accessHandler.js";
-import { message } from "./message.js";
 
 export async function getTracks(playlistId) {
   let max = false;

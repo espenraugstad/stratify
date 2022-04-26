@@ -20,3 +20,8 @@ const deleteBtn = document.getElementById("delete");
 deleteBtn.addEventListener('click', ()=>{
   location.href = "delete.html";
 })
+
+const randomPlaylist = document.getElementById('random-playlist');
+randomPlaylist.addEventListener('click', ()=>{
+  location.href = "random_playlist.html";
+})
