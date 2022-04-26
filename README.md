@@ -7,4 +7,4 @@ Spotify playlist utility app.
 * Can delete multiple playlists at once.
 
 ## Todo
-* Generate random playlists with songs from your existing playlists.
+* Handle if requests are too large for this. (Generate random playlists with songs from your existing playlists.)
