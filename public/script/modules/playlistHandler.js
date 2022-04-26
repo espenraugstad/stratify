@@ -51,7 +51,8 @@ export async function createPlaylist(name) {
       refresh();
     }
     let data = await res.json();
-    return true;
+    //return true;
+    return data;
   } catch (err) {
     console.log(err);
     return false;

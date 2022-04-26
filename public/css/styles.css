@@ -73,11 +73,12 @@ button:hover{
 
 .button-box{
     background-color: var(--color-button);
-    margin: 0 2rem;
+    margin: 1rem 2rem;
     background-color: var(--color-button);
     padding: 1rem;
     border-radius: 0.5rem;
     max-width: 250px;
+    min-width: 200px;
     font-size: 1.2rem;
     display: flex;
     text-align: center;
@@ -181,6 +182,8 @@ header{
 
 #menu{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* ==== All ==== */
@@ -309,4 +312,42 @@ header{
     margin: 1.5rem 0;
     max-height: 50vh;
     overflow-y: auto;
+}
+
+/* ==== Random playlist ==== */
+#new-random{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#input-fields{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+#input-fields>label{
+    justify-self: right;
+}
+
+/* #new-random>div{
+    margin: 1rem 0;
+    font-size: 20px;
+} */
+
+#new-random-name, #new-random-num{
+    height: 35px;
+    font-size: 20px;
+   
+}
+
+#new-random-num{
+    max-width: 80px;
+}
+
+#create-new-random{
+    margin: 2rem 0;
 }
