@@ -26,7 +26,11 @@ randomPlaylist.addEventListener('click', ()=>{
   location.href = "random_playlist.html";
 });
 
-const dev = document.getElementById('dev');
+document.getElementById('duplicates').addEventListener('click', ()=>{
+  location.href = "duplicates.html";
+});
+
+/* const dev = document.getElementById('dev');
 dev.addEventListener('click', ()=>{
   location.href = "dev.html";
-});
+}); */

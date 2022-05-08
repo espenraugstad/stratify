@@ -83,11 +83,21 @@ button:hover{
     display: flex;
     text-align: center;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
 
 .cancel{
     background-color: var(--color-red);
+}
+
+select{
+    margin: 1rem 0 2rem 0;
+    font-size: 20px;
+   /*  background-color: var(--color-green); */
+    border: none;
+    height: 2.5rem;
+    flex-shrink: 0;
 }
 
 /* ===== Header ===== */
@@ -350,6 +360,69 @@ header{
 
 #create-new-random{
     margin: 2rem 0;
+}
+
+/* ===== Duplicates ===== */
+#duplicateOptions{
+    margin-bottom: 2rem;
+}
+
+#duplicateOptionsSelections{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: .5rem;
+    justify-content: left;    
+    text-align: left;
+}
+
+.song{
+    display: flex;
+    align-items: center;
+    background-color: var(--color-darker);
+    padding: .5rem;
+    margin: .5rem 0;
+    max-width: 500px;
+}
+
+.song>img{
+    margin-right: 1rem;
+}
+
+#foundDuplicates{
+    width: 75%;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#foundDuplicates>h3{
+    justify-self: left;
+    font-size: 20px;
+}
+
+.song-names{
+    text-align: start;
+}
+
+.song-names div:nth-child(1){
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: .05rem;
+}
+
+.duplicateNumbers{
+    background-color: var(--color-darker);
+    height: calc(64px + 2*0.5rem);
+    min-width: calc(64px + 2*0.5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 /* ==== Dev ==== */
