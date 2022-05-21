@@ -1,353 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
-
 :root{
-    --color-green: #1F9764;
-    --color-button: #808080;
-    --color-background: #484848;
-    --color-darker: #575757;
-    --color-light-grey: #c5c5c5;
-    --color-light: white;
-    --color-red: rgb(175, 0, 0);
+    
 }
 
 *{
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-
-/* ===== Common elements ===== */
-
 body{
-    background-color: var(--color-background);
-    color: var(--color-light);
+    display: grid;
+    grid-template-rows: 150px 1fr 100px;
+    grid-template-areas:
+        "nav"
+        "main"
+        "footer";
+    height: 100vh;
 }
 
-
-h1{
-    font-size: 72px;
-    font-weight: 700;
-    text-align: center;
+nav{
+    background-color: red;
+    grid-area: "nav";
 }
 
-p{
-    font-size: 18px;
-    font-weight: 400;
-    margin: 2rem 0;
-}
-
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 5rem);
-}
-
-.text-center{
-    text-align: center;
-}
-
-
-button{
-    border: none;
-    background-color: var(--color-green);
-    color: var(--color-light);
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    text-transform: uppercase;
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
-}
-
-button:hover{
-    scale: 1.05;
-    transition: .3s;
-}
-
-.button-box{
-    background-color: var(--color-button);
-    margin: 1rem 2rem;
-    background-color: var(--color-button);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    max-width: 250px;
-    min-width: 200px;
-    font-size: 1.2rem;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.cancel{
-    background-color: var(--color-red);
-}
-
-/* ===== Header ===== */
-header{
-    height: 5rem;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#logo{
-    font-size: 30px;
-    font-weight: 900;
-}
-
-#logo>a{
-    text-decoration: none;
+main{
+    background-color: darkblue;
+    grid-area: "main";
     color: white;
-    letter-spacing: .12rem;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
 }
 
-#right-side{
-    display: flex;
-    font-size: 18px;
-}
-
-#right-side>a {
-    text-decoration: none;
-    color: white;
-    margin-right: 2rem;
-}
-
-#right-side>a:hover{
-    font-weight: 700;
-}
-
-#user{
-    height: 1.5rem;
-}
-
-#user::after{
-    content: " \25BC";
-}
-
-#user:hover::after{
-    content: " \25B2";
-}
-
-.dropdown-logout{
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.dropdown-logout:hover #logoutBtn{
-    display: flex;
-    width: 100%;
-    padding: .5rem;
-    margin-top: 1.5rem;
-}
-
-#logoutBtn{
-    background-color: var(--color-button);
-    display: none;
-    position: absolute;
-}
-
-#logoutBtn:hover ~ #user::after{
-    content: " \25B2";
-}
-
-#logoutBtn:hover{
-    font-weight: 700;
-}
-
-
-/* ===== Login page ===== */ 
-#loginBtn{
-    margin-top: 2rem;
-    width: fit-content;
-    height: 60px;
-    border-radius: 30px;   
-}
-
-/* ==== Home ==== */
-#home-container{
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 2rem;
-}
-
-#menu{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* ==== All ==== */
-#top-container{
-    justify-content: flex-start;
-    padding-top: 2rem;
+.center-flex{
+    background-color: rebeccapurple;
+    grid-column: 1/13;
+    width: 80vw;
+    height: 100%;
     margin: auto;
-}
-
-#all-container>p{
-    margin: 2rem 0;
-    font-style: italic;
-}
-
-.playlists{
-    display: grid;
-    grid-template-columns: 1fr .5fr 1fr;
-    column-gap: 3rem;
-    justify-items: center;
-    max-height: fit-content;
-    margin: 0 10rem; 
-}
-
-@media screen and (max-width: 1000px) {
-    .playlists{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: minmax(0,1fr) minmax(0,.5fr) minmax(0,1fr);
-        column-gap: 3rem;
-        justify-items: center;
-        max-height: fit-content;
-        margin: 0 10rem;
-    }
-}
-
-#copy-from, #copy-to{
-    /* border: 1px solid white; */
-    max-width: 500px;
-    min-width: 300px;
-    width: 100%;
-    padding-bottom: 2rem;
-    margin: 1.5rem 0;
-}
-
-#copy-from h2, #copy-to h2{
-    font-size: 30px;
-}
-
-#copy-from-lists, #copy-to-lists{
-    max-height: 50vh;
-    
-    overflow-y: auto;
-}
-
-#copy-to-lists{
-    margin-top: 0;
-}
-
-#show-all{
-    margin: .5rem .25rem 1.5rem 0;
-}
-
-.select-all{
-    height: 50px;
     display: flex;
-    align-items: baseline;
-    margin: 1rem 0;
-}
-
-#newPlaylist{
-    margin-right: 1rem;
-    font-size: 30px;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-.playlist-list{
-    background-color: var(--color-darker);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    overflow: auto;
-    cursor: pointer;
-}
-
-.playlist-list span:nth-child(1){
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.playlist-list span:nth-child(2){
-    color: var(--color-light-grey);
-}
-
-.selected-playlist-from, .selected-playlist-to{
-    background-color: var(--color-green);
-}
-
-
-#add-button{
-    /* position: sticky;
-    top: 75vh; */
-    align-self: center;
-
-}
-
-/* ==== Delete ==== */
-.delete-playlists{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 5rem;
-    margin: 0 10rem;
-}
-
-.playlist-col{
-    max-width: 500px;
-    min-width: 300px;
-    width: 100%;
-    padding-bottom: 2rem;
-    margin: 1.5rem 0;
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-/* ==== Random playlist ==== */
-#new-random{
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-#input-fields{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1rem;
-    align-items: center;
-}
-
-#input-fields>label{
-    justify-self: right;
-}
-
-/* #new-random>div{
-    margin: 1rem 0;
-    font-size: 20px;
-} */
-
-#new-random-name, #new-random-num{
-    height: 35px;
-    font-size: 20px;
-   
-}
-
-#new-random-num{
-    max-width: 80px;
-}
-
-#create-new-random{
-    margin: 2rem 0;
+footer{
+    background-color: gold;
+    grid-area: "footer";
 }
