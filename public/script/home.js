@@ -5,3 +5,15 @@ window.onload = ()=>{
     getMode();
     header();
 }
+
+document.getElementById('merge').addEventListener('click', ()=>{
+    location.href="merge.html";
+});
+
+document.getElementById('delete').addEventListener('click', ()=>{
+    console.log('delete');
+});
+
+document.getElementById('add').addEventListener('click', ()=>{
+    console.log('add');
+});

@@ -13,10 +13,12 @@ body{
     --color-secondary: #B0CCC8;
     --color-background: #191C1C;
     --color-on-background: #E1E3E2;
-    --color-surface: #3F4947;
+    --color-surface-var: #3F4947;
+    --color-on-surface-var: #BEC8C6;
+    --color-outline-10: #E1E3E210;
 
     display: grid;
-    grid-template-rows: 150px 1fr 100px;
+    grid-template-rows: 100px 1fr 100px;
     grid-template-areas:
         "nav"
         "main"
@@ -33,7 +35,9 @@ body.light{
     --color-secondary:#4A6360;
     --color-background: #FAFDFB;
     --color-on-background: #191C1C;
-    --color-surface: #DAE4E2;
+    --color-surface-var: #DAE4E2;
+    --color-on-surface-var: #3F4947;
+    --color-outline-10: #6E797710;
 }
 
 nav{
@@ -104,7 +108,7 @@ nav{
 }
 
 #logoutBtn{
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-var);
     display: none;
     position: absolute;
 }
@@ -184,4 +188,36 @@ footer{
     align-items: center;
     justify-content: center;
     padding: 2rem;
+}
+
+.flexbox{
+    display: flex;
+}
+
+/* ===== HOME ===== */
+.menu-bar{
+   box-shadow: 0 4px 4px var(--color-outline-10); 
+   border-radius: 0.75rem;
+   margin: 1rem 0;
+   cursor: pointer;
+   color: var(--color-on-surface-var);
+}
+
+.menu-item{
+    font-size: 32px;
+    padding: 1rem; 
+    background-color: var(--color-surface-var);
+    border-radius: .75rem 0 0 .75rem;
+    margin-right: 0.5rem;
+    min-width: 10rem;
+    
+}
+
+.menu-description{
+    font-size: 16px;
+    background-color: var(--color-surface-var);
+    border-radius: 0 .75rem .75rem 0;
+    padding: 1rem;
+    width: 100%;
+    min-width: 30rem;
 }
