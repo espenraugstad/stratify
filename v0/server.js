@@ -43,7 +43,7 @@ server.post("/getAccessToken", async (req, res) => {
     method: "POST",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
-      Authorization:
+      'Authorization':
         "Basic " +
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
     },

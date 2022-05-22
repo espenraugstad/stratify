@@ -13,27 +13,28 @@
   </head>
   <body>
     <nav>
-      <div id="header-left">
-        <a href="home.html"><img src="./imgs/logolightCircle1.png" alt="" id="logo" /><span
-          >Stratify</span
-        ></a>
-      </div>
+        <div id="header-left">
+            <a href="home.html"><img src="./imgs/logolightCircle1.png" alt="" id="logo" /><span
+              >Stratify</span
+            ></a>
+          </div>
       <div id="header-right">
+        <a href="home.html">Home</a>
+        <div class="dropdown-logout">
+          <div class="dropdown-content" id="logoutBtn">Logout</div>
+          <div id="user"></div>
+        </div>
         <span class="material-icons" id="mode"> light_mode </span>
       </div>
     </nav>
+
     <main>
-      <div class="container center-flex center-align-flex center-justify-flex">
-        <h1>Play with your playlists</h1>
-        <div class="text-it text-center">
-          <p>Create with your Spotify playlists. <br>
-            Copy from multiple lists at once, create, delete, backup and more.
-          </p>
-        </div>
-        <button id="loginBtn">Login with Spotify</button>
+      <div class="container center-flex center-align-flex">
+        <h1>Welcome</h1>
       </div>
     </main>
+
     <footer>Created by Espen Raugstad</footer>
-    <script src="./script/index.js" type="module"></script>
+    <script src="./script/home.js" type="module"></script>
   </body>
 </html>
