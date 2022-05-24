@@ -10,12 +10,17 @@
 body{
     --color-primary: #51DBD1;
     --color-on-primary: #003733;
+    --color-primary-container: #00504B;
+    --color-on-primary-container: #70F7EC;
     --color-secondary: #B0CCC8;
+    --color-on-secondary: #1B3532;
+    --color-secondary-container: #324B48;
+    --color-on-secondary-container: #CCE8E4;
     --color-background: #191C1C;
     --color-on-background: #E1E3E2;
     --color-surface-var: #3F4947;
     --color-on-surface-var: #BEC8C6;
-    --color-outline-10: #E1E3E210;
+    --color-outline: #E1E3E2;
 
     display: grid;
     grid-template-rows: 100px 1fr 100px;
@@ -32,12 +37,17 @@ body{
 body.light{
     --color-primary: #006A63;
     --color-on-primary: #FFFFFF;
+    --color-primary-container: #70F7EC;
+    --color-on-primary-container: #00201D;
     --color-secondary:#4A6360;
+    --color-on-secondary: #FFFFFF;
+    --color-secondary-container: #CCE8E4;
+    --color-on-secondary-container: #051F1D;
     --color-background: #FAFDFB;
     --color-on-background: #191C1C;
     --color-surface-var: #DAE4E2;
     --color-on-surface-var: #3F4947;
-    --color-outline-10: #6E797710;
+    --color-outline: #6E7977;
 }
 
 nav{
@@ -170,7 +180,6 @@ button{
     margin: auto;
     display: flex;
     flex-direction: column;
-    
 }
 
 .center-align-flex{
@@ -179,6 +188,18 @@ button{
 
 .center-justify-flex{
     justify-content: center;
+}
+
+.center-self{
+    align-self: center;
+}
+
+.flex-start{
+    align-self: flex-start;
+}
+
+.flex-end{
+    align-self: flex-end;
 }
 
 footer{
@@ -194,19 +215,39 @@ footer{
     display: flex;
 }
 
+.flex-col{
+    flex-direction: column;
+}
+
+.new-button{
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 2rem;
+    margin: 0 .5rem;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 /* ===== HOME ===== */
 .menu-bar{
-   box-shadow: 0 4px 4px var(--color-outline-10); 
+
    border-radius: 0.75rem;
    margin: 1rem 0;
    cursor: pointer;
-   color: var(--color-on-surface-var);
+   color: var(--color-on-primary);
 }
 
 .menu-item{
     font-size: 32px;
     padding: 1rem; 
-    background-color: var(--color-surface-var);
+    background-color: var(--color-primary);
+    border: .1px solid var(--color-surface-var);
+    border-right: none; 
+   /*  box-shadow: 0 0px 4px var(--color-primary); */
     border-radius: .75rem 0 0 .75rem;
     margin-right: 0.5rem;
     min-width: 10rem;
@@ -215,9 +256,97 @@ footer{
 
 .menu-description{
     font-size: 16px;
-    background-color: var(--color-surface-var);
+    background-color: var(--color-primary);
+    /* box-shadow: 0 0px 4px var(--color-primary); */
     border-radius: 0 .75rem .75rem 0;
+    border: .1px solid var(--color-surface-var);
+    border-left: none; 
     padding: 1rem;
     width: 100%;
     min-width: 30rem;
 }
+
+/* ===== MERGE ===== */
+.double-col{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1000px;
+}
+
+#all-lists{
+    margin: 1rem .5rem 1rem 1rem;
+    
+}
+
+#playlists-div{
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+    height: 2rem;
+    overflow: auto;
+    height: 100%;
+    max-height: 500px;
+    max-width: 500px;
+}
+
+#playlists-div>div{
+    display: flex;
+    flex-direction: column;
+    margin: .5rem 0rem;
+    padding: 1rem;
+    
+    overflow-x: auto;
+}
+
+.primary-container-unselected{
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+}
+
+.primary-container-selected{
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+}
+
+#selector{
+    width: calc(100% - 2rem);
+    max-height: 200px;
+    max-width: 500px;
+    
+
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+
+}
+
+#select-target,
+.target-option{
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: var(--color-primary-container);
+
+}
+
+.hidden{
+    display:none;
+}
+
+#target-playlist{
+    position: relative;
+    /* width: calc(100% - 2rem); */
+    width: 100%;
+    overflow: auto;
+    margin: 1rem;
+    height: 2rem;
+    font-size: 16px;
+    background-color: var(--color-primary-container);
+    /* background-color: red; */
+    border: none;
+    border-radius: 1rem;
+    color: var(--color-on-primary-container);
+    padding: 0 1rem;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+

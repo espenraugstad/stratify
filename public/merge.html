@@ -31,6 +31,39 @@
     <main>
         <div class="container center-flex center-align-flex">
             <h1>Merge</h1>
+            <div class="double-col">
+
+
+              <div class="left-col">
+                <h3 class="text-center">Merge from these playlists...</h3>
+                <input type="checkbox" name="" id="all-lists">
+                <label for="all-lists">Show all my lists</label>
+                <div id="playlists-div"></div>
+              </div>
+
+
+
+              <div class="right-col flexbox flex-col">
+                <h3 class="text-center">...to this list</h3>
+                <div id="selector">
+                  <!-- <select name="target-playlist" id="target-playlist">
+                    <option value=""> -- Select target playlist --</option>
+                   </select> -->
+                   <div id="select-target">-- Select target playlist ---</div>
+                </div>
+                
+              
+                  
+                  
+                <h3 class="text-center">or...</h3>
+                <div>
+                  <span class="new-button">+</span>
+                  Create new list
+                </div>
+                <div class="flexbox"></div>
+                <button id="merge" class="center-self">Merge</button>
+              </div>
+            </div>
         </div>
       </main>
 
