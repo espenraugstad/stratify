@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <title>Stratify</title>
+  </head>
+  <body>
+    <nav>
+      <div id="header-left">
+        <a href="home.html"
+          ><img src="./imgs/logolightCircle1.png" alt="" id="logo" /><span
+            >Stratify</span
+          ></a
+        >
+      </div>
+      <div id="header-right">
+        <a href="home.html">Home</a>
+        <div class="dropdown-logout">
+          <div class="dropdown-content" id="logoutBtn">Logout</div>
+          <div id="user"></div>
+        </div>
+        <span class="material-icons" id="mode"> light_mode </span>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container center-flex center-align-flex">
+        <h1>Merge</h1>
+        <div id="playlists-div-header">Select playlists to merge from</div>
+        <div id="checkall" class="hidden">
+          <input type="checkbox" name="" id="all-lists" />
+          <label for="all-lists">Show all my lists</label>
+        </div>
+
+        <div id="playlists-div" class="hidden"></div>
+      </div>
+    </main>
+
+    <footer>Created by Espen Raugstad</footer>
+    <script src="./script/merge2.js" type="module"></script>
+  </body>
+</html>
