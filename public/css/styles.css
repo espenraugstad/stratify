@@ -106,13 +106,40 @@ button {
   height: 100%;
 }
 
-.logo {
+.logo-img {
   width: 50px;
   height: 50px;
+}
+
+.nav-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .nav-name {
+    display: none;
+  }
 }
 
 .menu-img {
   width: 35px;
   height: 35px;
 }
+
+.menu > ul {
+  list-style: none;
+}
+
+.menu-item {
+  margin-right: 2rem;
+}
+
+.menu-item > a {
+  text-decoration: none;
+  color: var(--col-on-bg);
+  font-weight: 600;
+}
+
 /* === Index.html === */
