@@ -9,7 +9,7 @@
 }
 body{
     display: grid;
-    grid-template-rows: 150px 1fr 100px;
+    grid-template-rows: 80px 1fr 100px;
     grid-template-areas:
         "nav"
         "main"
@@ -20,25 +20,16 @@ body{
 nav{
     background-color: red;
     grid-area: "nav";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
 }
 
 main{
     background-color: darkblue;
     grid-area: "main";
     color: white;
-    display: grid;
-    grid-template-columns: repeat(12,1fr);
-}
-
-.center-flex{
-    background-color: rebeccapurple;
-    grid-column: 1/13;
-    width: 80vw;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 footer{
