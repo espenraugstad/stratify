@@ -1,38 +1,107 @@
-:root{
-    
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+:root {
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    display: grid;
-    grid-template-rows: 80px 1fr 100px;
-    grid-template-areas:
-        "nav"
-        "main"
-        "footer";
-    height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav{
-    background-color: red;
-    grid-area: "nav";
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
+body {
+  font-family: "Poppins", "sans-serif";
+  /* Light mode (default) */
+  --col-bg: #fcfdf7;
+  --col-on-bg: #1a1c19;
+  --col-primary: #006e28;
+  --col-on-primary: #ffffff;
+  background-color: var(--col-bg);
+  color: var(--col-on-bg);
+  display: grid;
+  grid-template-rows: 80px 1fr 80px;
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+  height: 100vh;
 }
 
-main{
-    background-color: darkblue;
-    grid-area: "main";
-    color: white;
+body.dark {
+  --col-bg: #1a1c19;
+  --col-on-bg: #e2e3dd;
+  --col-primary: #48e26b;
+  --col-on-primary: #003911;
+  background-color: var(--col-bg);
+  color: var(--col-on-bg);
 }
 
-footer{
-    background-color: gold;
-    grid-area: "footer";
+nav {
+  grid-area: "nav";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+}
+
+main {
+  grid-area: "main";
+}
+
+footer {
+  grid-area: "footer";
+}
+
+p {
+  margin: 0.75rem;
+}
+
+button {
+  width: 12.5rem;
+  height: 3.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: var(--col-primary);
+  color: var(--col-on-primary);
+  border: none;
+  border-radius: 3rem;
+  margin: 1rem;
+}
+
+/* === Utility === */
+.flex {
+  display: flex;
+}
+
+.flex-align-items {
+  align-items: center;
+}
+
+.flex-justify-content {
+  justify-content: center;
+}
+
+.flex-center-all {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* === General classes === */
+.container {
+  height: 100%;
+}
+
+/* === Index.html === */
+.big-logo {
+  margin-bottom: 5rem;
 }
