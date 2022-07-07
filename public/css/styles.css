@@ -19,7 +19,7 @@ body {
   background-color: var(--col-bg);
   color: var(--col-on-bg);
   display: grid;
-  grid-template-rows: 80px 1fr 80px;
+  grid-template-rows: 80px 1fr 50px;
   grid-template-areas:
     "nav"
     "main"
@@ -51,6 +51,10 @@ main {
 
 footer {
   grid-area: "footer";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.5rem;
 }
 
 p {
@@ -68,6 +72,7 @@ button {
   border: none;
   border-radius: 3rem;
   margin: 1rem;
+  cursor: pointer;
 }
 
 /* === Utility === */
@@ -101,7 +106,13 @@ button {
   height: 100%;
 }
 
-/* === Index.html === */
-.big-logo {
-  margin-bottom: 5rem;
+.logo {
+  width: 50px;
+  height: 50px;
 }
+
+.menu-img {
+  width: 35px;
+  height: 35px;
+}
+/* === Index.html === */
