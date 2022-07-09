@@ -32,4 +32,29 @@ export function header() {
       document.querySelector(".logo-img").src = "./assets/logo_on_light.png";
     }
   });
+
+  // Mobile menu
+  const primaryMenu = document.querySelector(".primary-menu");
+  // Show mobile menu
+  const menuImg = document.querySelector(".menu-img");
+  menuImg.addEventListener("click", () => {
+    const vis = primaryMenu.getAttribute("mobile-visible");
+    if (vis === "false" && window.screen.width <= 500) {
+      primaryMenu.setAttribute("mobile-visible", true);
+    } else {
+      console.log("Not relevant");
+    }
+  });
+
+  // Close mobile menu
+  const mobileMenuClose = document.querySelector(".mobile-menu-close");
+  mobileMenuClose.addEventListener("click", () => {
+    console.log("close");
+    const vis = primaryMenu.getAttribute("mobile-visible");
+    if (vis === "true") {
+      primaryMenu.setAttribute("mobile-visible", false);
+    } else {
+      console.log("An error occured");
+    }
+  });
 }
